@@ -58,4 +58,4 @@ def main(URL, OUTFILE):
 if __name__ == '__main__':
 	_VAR_URL = 'https://www.icpsr.umich.edu/icpsrweb/ICPSR/ssvd/variables?q=*&paging.startRow={}' #this should return all the variables, just have to scrape them
 	_OUTPUT_FILE = '../output/all_vars.csv'
-	main(_VAR_URL, _OUTPUT_FILE, _AGENT)
+	main(_VAR_URL, _OUTPUT_FILE)
