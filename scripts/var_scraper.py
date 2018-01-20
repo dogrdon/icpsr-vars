@@ -46,9 +46,9 @@ def main(URL, OUTFILE):
 			res = requests.get(CURR_URL, headers=headers)
 			data = parse_content(res)
 			
-			print("First pass with {} results starting at row {}".format(len(data), START_PAGE))
+			print("Writing {} results starting at row {}".format(len(data), START_PAGE))
 			for line in data:
-				writer.writerow(line)
+				writer.writerow([unicode(s).encode("utf-8") for s in line])
 			
 			time.sleep(3)
 			START_PAGE += 50
