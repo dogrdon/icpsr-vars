@@ -50,7 +50,7 @@ def main(URL, OUTFILE):
 			for line in data:
 				writer.writerow([unicode(s).encode("utf-8") for s in line])
 			
-			time.sleep(3)
+			time.sleep(1)
 			START_PAGE += 50
 
 
