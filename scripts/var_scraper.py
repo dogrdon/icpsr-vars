@@ -23,9 +23,10 @@ def parse_content(doc):
 		else:
 			var_name = var_url = None
 		
-		var_label = item.find('p').text.strip()
-
-		var_dataset = item.find('em').text.strip()
+		var_label_tag = item.find('p')
+                var_label = var_label_tag.text.strip() if var_label_tag is not None else ''
+		var_dataset_tag = item.find('em')
+                var_dataset = var_dataset_tag.text.strip() if var_dataset_tag is not None else ''
 		
 		if var_id is not None:
 			result_data.append((var_id, var_name, var_url, var_label, var_dataset))
@@ -37,7 +38,7 @@ def main(URL, OUTFILE):
 	with open(OUTFILE,'w') as outfile:
 		writer = csv.writer(outfile)
 		writer.writerow(['var_id', 'var_name', 'var_url', 'var_label', 'var_dataset'])
-		START_PAGE = 1
+		START_PAGE = 802901
 		#while START_PAGE < 202: # only the first 4 pages
 		while START_PAGE < 4960852: # the whole thing
 			AGENT = generate_user_agent(device_type = "desktop", os=('mac', 'linux')) #new agent each time
