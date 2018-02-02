@@ -38,9 +38,9 @@ def main(URL, OUTFILE):
 	with open(OUTFILE,'w') as outfile:
 		writer = csv.writer(outfile)
 		writer.writerow(['var_id', 'var_name', 'var_url', 'var_label', 'var_dataset'])
-		START_PAGE = 764001
+		START_PAGE = 4859501
 		#while START_PAGE < 202: # only the first 4 pages
-		while START_PAGE < 4962052: # the whole thing
+		while START_PAGE < 4969802: # the whole thing
 			AGENT = generate_user_agent(device_type = "desktop", os=('mac', 'linux')) #new agent each time
 			headers = {'User-Agent':AGENT}
 			CURR_URL = URL.format(START_PAGE)
