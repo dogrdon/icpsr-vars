@@ -12,7 +12,8 @@ venv.bak/
 
 # Project specific
 
-
+output/all_in_one/
+output/all_vars*
 
 # other nonsense
 .DS_Store
