@@ -15,7 +15,7 @@ def modify_url(url):
 
 def fetch_doi(url):
 	'''load url, get the doi'''
-	print("Getting doi for {}".format(url))
+	#print("Getting doi for {}".format(url))
 	AGENT = generate_user_agent(device_type = "desktop", os=('mac', 'linux')) #new agent each time
 	headers = {'User-Agent':AGENT}
 	try:
@@ -46,9 +46,10 @@ def unique_datasets(csvfile):
 		header = next(reader)
 		csvlen = get_len_csv(csvfile)
 		for row in tqdm(reader, total=csvlen):
-			updated_url = modify_url(row[2])
+			orig_url = row[2]
+			updated_url = modify_url(orig_url)
 			if updated_url not in unique_datasets:
-				unique_datasets.append((row[2],updated_url))
+				unique_datasets.append(updated_url)
 	return unique_datasets
 
 if __name__ == '__main__':
@@ -58,15 +59,14 @@ if __name__ == '__main__':
 	unique_only = unique_datasets(all_vars_csv)
 	print("Got {} datasets to match".format(len(unique_only)))
 
-	xwalk = []
-	for i in unique_only:
-		doi_match = fetch_doi(i[1])
-		xwalk.append((i[0], i[1], doi_match))
-
 
 	with open(doi_xwalk, 'w', encoding='utf-8') as doiout:
 		writer = csv.writer(doiout)
-		header = ['url', 'updated_url', 'doi']
+		header = ['updated_url', 'doi']
 		writer.writerow(header)
-		for row in xwalk:
+		#for row in xwalk:
+		print("Fetching doi and writing to file -- {}".format(doi_xwalk))
+		for i in tqdm(unique_only, total=len(unique_only)):
+			doi_match = fetch_doi(i)
+			row = [i, doi_match]
 			writer.writerow(row)
