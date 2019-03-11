@@ -14,6 +14,7 @@ venv.bak/
 
 output/all_in_one/
 output/all_vars*
+all_vars.csv
 
 # other nonsense
 .DS_Store
